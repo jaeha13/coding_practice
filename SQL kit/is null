@@ -1,0 +1,15 @@
+-- 이름이 없는 동물의 아이디 --
+SELECT ANIMAL_ID from ANIMAL_INS where NAME is NULL order by ANIMAL_ID;
+
+-- 이름이 있는 동물의 아이디 --
+SELECT ANIMAL_ID from ANIMAL_INS where name is not NULL order by ANIMAL_ID;
+
+-- NULL 처리하기 --
+SELECT animal_type,
+case
+    when name is null then 'No name'
+    else name
+end as name,
+sex_upon_intake
+from animal_ins
+order by animal_id;

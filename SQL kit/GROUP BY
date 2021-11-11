@@ -1,0 +1,24 @@
+-- 고양이와 개는 몇 마리 있을까 --
+select ANIMAL_TYPE, COUNT(*) count from ANIMAL_INS group by ANIMAL_TYPE order by ANIMAL_TYPE;
+
+-- 동명 동물 수 찾기 --
+SELECT NAME, COUNT(NAME) COUNT from ANIMAL_INS group by NAME having COUNT(NAME) > 1 order by NAME;
+
+-- 입양 시각 구하기(1) --
+select TO_CHAR(DATETIME, 'HH24') as HOUR, COUNT(*) COUNT
+from ANIMAL_OUTS
+where TO_CHAR(DATETIME, 'HH24') between 9 and 19
+group by TO_CHAR(DATETIME, 'HH24')
+order by TO_CHAR(DATETIME, 'HH24');
+
+-- 입양 시각 구하기(2) --
+SELECT HOUR, COUNT(O.DATETIME) AS COUNT
+FROM
+(
+    SELECT LEVEL-1 AS HOUR
+    FROM DUAL
+    CONNECT BY LEVEL<=24
+)A LEFT join ANIMAL_OUTS O
+ON A.HOUR = to_char(O.DATETIME,'HH24')
+GROUP BY HOUR
+ORDER BY HOUR;

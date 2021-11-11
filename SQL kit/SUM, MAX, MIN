@@ -1,0 +1,12 @@
+-- 최대값 구하기 --
+select max(DATETIME) from ANIMAL_INS;
+
+-- 최소값 구하기 --
+select min(DATETIME) from ANIMAL_INS;
+
+-- 동물 수 구하기 --
+select count(ANIMAL_ID) from ANIMAL_INS;
+
+-- 중복 제거하기 --
+SELECT COUNT(DISTINCT NAME) from ANIMAL_INS;
+select count(unique(NAME)) from ANIMAL_INS;
